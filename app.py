@@ -47,5 +47,35 @@ def predict():
     return render_template("index.html", prediction=round(prediction[0], 2))
 
 
+
+@app.route("/forecast", methods=["POST"])
+def forecast():
+    price = float(request.form["price"])
+    product = request.form["product"]
+
+    product_A = 1 if product == "A" else 0
+    product_B = 1 if product == "B" else 0
+
+    today = pd.Timestamp.today()
+    predictions = []
+
+    for i in range(1, 8):
+        future_date = today + pd.Timedelta(days=i)
+
+        day = future_date.day
+        month = future_date.month
+        day_of_week = future_date.dayofweek
+
+        input_data = [[price, day, month, day_of_week, product_A, product_B]]
+
+        pred = model.predict(input_data)[0]
+
+        predictions.append({
+            "date": str(future_date.date()),
+            "sales": round(pred, 2)
+        })
+
+    return render_template("index.html", forecast=predictions)
+
 if __name__ == "__main__":
     app.run(debug=True)
