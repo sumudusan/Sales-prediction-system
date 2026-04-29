@@ -35,9 +35,9 @@ It allows users to:
 
 ---
 
-### 🔹 3. 7-Day Forecast 🔮
+### 🔹 3. 30-Day Forecast 🔮
 
-* Predict sales for the **next 7 days**
+* Predict sales for the **next 30 days**
 * Helps businesses plan inventory
 
 ---
