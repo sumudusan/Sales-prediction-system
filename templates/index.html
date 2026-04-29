@@ -30,6 +30,16 @@ button { background: blue; color:white; padding:10px; }
     🔥 Predicted Sales: {{ prediction }}
 {% endif %}
 </h3>
+<h3>
+    {% if forecast %}
+    <h3>7-Day Forecast</h3>
+    <ul>
+    {% for item in forecast %}
+        <li>{{ item.date }} → {{ item.sales }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+</h3>
 
 </body>
 </html>
