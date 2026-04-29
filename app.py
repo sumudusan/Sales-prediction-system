@@ -70,7 +70,7 @@ def forecast():
     dates = []
     sales = []
 
-    for i in range(1, 8):
+    for i in range(1, 31):
         future_date = today + pd.Timedelta(days=i)
 
         input_data = [[
