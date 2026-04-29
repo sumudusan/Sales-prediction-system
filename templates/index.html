@@ -3,16 +3,19 @@
 <head>
     <title>Sales Predictor</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body style="font-family: Arial; text-align:center; margin-top:50px;">
+
     <style>
-body { background: #f5f5f5; }
-form { background: white; padding: 20px; display:inline-block; border-radius:10px; }
-button { background: blue; color:white; padding:10px; }
-</style>
+        body { background: #f5f5f5; font-family: Arial; text-align:center; margin-top:50px; }
+        form { background: white; padding: 20px; display:inline-block; border-radius:10px; }
+        button { background: blue; color:white; padding:10px; margin:5px; }
+    </style>
+</head>
+
+<body>
 
 <h2>📊 Sales Prediction System</h2>
 
+<!-- Prediction Form -->
 <form action="/predict" method="post">
     <input type="number" name="price" placeholder="Price" required><br><br>
     <input type="date" name="date" required><br><br>
@@ -25,27 +28,44 @@ button { background: blue; color:white; padding:10px; }
     <button type="submit">Predict</button>
     <button formaction="/forecast">Forecast 7 Days</button>
 </form>
-<canvas id="salesChart" width="400" height="200"></canvas>
 
-<h3>
+<!-- Prediction Result -->
 {% if prediction %}
-    🔥 Predicted Sales: {{ prediction }}
+    <h3>🔥 Predicted Sales: {{ prediction }}</h3>
 {% endif %}
-</h3>
-<h3>
-    {% if forecast %}
-    <h3>7-Day Forecast</h3>
+
+<!-- Forecast List -->
+{% if forecast %}
+    <h3>📅 7-Day Forecast</h3>
     <ul>
     {% for item in forecast %}
         <li>{{ item.date }} → {{ item.sales }}</li>
     {% endfor %}
     </ul>
 {% endif %}
-</h3>
 
-</body>
-</html>
+<!-- Chart -->
+{% if dates and sales %}
+    <canvas id="salesChart" width="400" height="200"></canvas>
+{% endif %}
 
+<!-- File Upload -->
+<h3>Upload Your Sales Data</h3>
+
+<form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" required>
+    <button type="submit">Upload</button>
+</form>
+
+{% if message %}
+    <p>{{ message }}</p>
+{% endif %}
+
+{% if avg %}
+    <p>Average Sales: {{ avg }}</p>
+{% endif %}
+
+<!-- Chart Script -->
 {% if dates and sales %}
 <script>
     const labels = {{ dates | tojson }};
@@ -67,3 +87,6 @@ button { background: blue; color:white; padding:10px; }
     });
 </script>
 {% endif %}
+
+</body>
+</html>
