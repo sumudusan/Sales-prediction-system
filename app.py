@@ -28,12 +28,15 @@ def home():
 @app.route("/predict", methods=["POST"])
 def predict():
     price = float(request.form["price"])
-    day = int(request.form["day"])
-    month = int(request.form["month"])
-    day_of_week = int(request.form["day_of_week"])
+    date_input = request.form["date"]
     product = request.form["product"]
 
-    # Encode product
+    date = pd.to_datetime(date_input)
+
+    day = date.day
+    month = date.month
+    day_of_week = date.dayofweek
+
     product_A = 1 if product == "A" else 0
     product_B = 1 if product == "B" else 0
 
