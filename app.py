@@ -1,3 +1,4 @@
+from flask import render_template
 from flask import Flask, request, jsonify
 import pandas as pd
 from sklearn.linear_model import LinearRegression
@@ -20,26 +21,27 @@ y = df["quantity_sold"]
 model = LinearRegression()
 model.fit(X, y)
 
-
+@app.route("/")
+def home():
+    return render_template("index.html")
 
 @app.route("/predict", methods=["POST"])
 def predict():
-    data = request.json
+    price = float(request.form["price"])
+    day = int(request.form["day"])
+    month = int(request.form["month"])
+    day_of_week = int(request.form["day_of_week"])
+    product = request.form["product"]
 
-    price = data["price"]
-    day = data["day"]
-    month = data["month"]
-    day_of_week = data["day_of_week"]
-    product_A = data["product_A"]
-    product_B = data["product_B"]
+    # Encode product
+    product_A = 1 if product == "A" else 0
+    product_B = 1 if product == "B" else 0
 
     input_data = [[price, day, month, day_of_week, product_A, product_B]]
 
     prediction = model.predict(input_data)
 
-    return jsonify({
-        "predicted_sales": float(prediction[0])
-    })
+    return render_template("index.html", prediction=round(prediction[0], 2))
 
 
 if __name__ == "__main__":

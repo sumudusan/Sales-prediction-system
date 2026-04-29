@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sales Prediction</title>
+</head>
+<body>
+
+<h2>Sales Prediction System</h2>
+
+<form action="/predict" method="post">
+    Price: <input type="number" name="price"><br><br>
+    Day: <input type="number" name="day"><br><br>
+    Month: <input type="number" name="month"><br><br>
+    Day of Week (0-6): <input type="number" name="day_of_week"><br><br>
+
+    Product:
+    <select name="product">
+        <option value="A">A</option>
+        <option value="B">B</option>
+    </select><br><br>
+
+    <button type="submit">Predict</button>
+</form>
+
+<h3>
+    {% if prediction %}
+        Predicted Sales: {{ prediction }}
+    {% endif %}
+</h3>
+
+</body>
+</html>
