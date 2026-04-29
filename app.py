@@ -77,5 +77,12 @@ def forecast():
 
     return render_template("index.html", forecast=predictions)
 
+
+@app.route("/insights")
+def insights():
+    total_sales = df.groupby("product_A")["quantity_sold"].sum()
+
+    return render_template("index.html", insights=total_sales.to_dict())
+
 if __name__ == "__main__":
     app.run(debug=True)
