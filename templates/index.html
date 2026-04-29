@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Sales Predictor</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body style="font-family: Arial; text-align:center; margin-top:50px;">
     <style>
@@ -24,6 +25,7 @@ button { background: blue; color:white; padding:10px; }
     <button type="submit">Predict</button>
     <button formaction="/forecast">Forecast 7 Days</button>
 </form>
+<canvas id="salesChart" width="400" height="200"></canvas>
 
 <h3>
 {% if prediction %}
@@ -43,3 +45,25 @@ button { background: blue; color:white; padding:10px; }
 
 </body>
 </html>
+
+{% if dates and sales %}
+<script>
+    const labels = {{ dates | tojson }};
+    const data = {{ sales | tojson }};
+
+    const ctx = document.getElementById('salesChart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Predicted Sales',
+                data: data,
+                borderWidth: 2,
+                fill: false
+            }]
+        }
+    });
+</script>
+{% endif %}

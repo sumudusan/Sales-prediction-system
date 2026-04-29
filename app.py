@@ -57,7 +57,9 @@ def forecast():
     product_B = 1 if product == "B" else 0
 
     today = pd.Timestamp.today()
-    predictions = []
+
+    dates = []
+    sales = []
 
     for i in range(1, 8):
         future_date = today + pd.Timedelta(days=i)
@@ -67,15 +69,12 @@ def forecast():
         day_of_week = future_date.dayofweek
 
         input_data = [[price, day, month, day_of_week, product_A, product_B]]
-
         pred = model.predict(input_data)[0]
 
-        predictions.append({
-            "date": str(future_date.date()),
-            "sales": round(pred, 2)
-        })
+        dates.append(str(future_date.date()))
+        sales.append(round(pred, 2))
 
-    return render_template("index.html", forecast=predictions)
+    return render_template("index.html", dates=dates, sales=sales)
 
 
 @app.route("/insights")
