@@ -1,5 +1,11 @@
 # 📊 Smart Sales Prediction System
 
+## 🚀 Live Demo
+
+👉 https://sales-prediction-system.onrender.com
+
+---
+
 ## 🚀 Overview
 
 This project is a **Machine Learning-based web application** that predicts product sales and provides insights for better business decisions.
@@ -102,6 +108,8 @@ It allows users to:
 sales-prediction/
 │
 ├── app.py
+├── model.py
+├── utils.py
 ├── sales_data.csv
 ├── requirements.txt
 └── templates/
@@ -110,7 +118,7 @@ sales-prediction/
 
 ---
 
-## ▶️ How to Run
+## ▶️ How to Run Locally
 
 ### 1. Clone the repository
 
@@ -152,7 +160,7 @@ date,product,quantity_sold,price
 ## ⚠️ Limitations
 
 * Uses small dataset (for demo)
-* Model can be improved with more data
+* Model accuracy can improve with more data
 * No user authentication (yet)
 
 ---
@@ -160,10 +168,10 @@ date,product,quantity_sold,price
 ## 🔮 Future Improvements
 
 * Add login system
-* Deploy online (Render / AWS)
-* Use advanced models (Random Forest, XGBoost)
-* Add dashboard with more analytics
-* Multi-product support
+* Improve model (Random Forest, XGBoost)
+* Add advanced analytics dashboard
+* Multi-product and category support
+* Cloud database integration
 
 ---
 
@@ -175,17 +183,18 @@ This system can be used for:
 * Online sellers
 * Inventory planning
 
-Possible monetization:
+### Monetization Options:
 
-* SaaS (monthly subscription)
-* Freelance service
+* SaaS (monthly subscription model)
+* Freelance service for businesses
+* Custom analytics solutions
 
 ---
 
 ## 👨‍💻 Author
 
 * Developed as a Machine Learning project
-* Focused on real-world business use
+* Focused on real-world business applications
 
 ---
 
@@ -196,5 +205,6 @@ This project demonstrates:
 * End-to-end ML workflow
 * Real-world problem solving
 * Full-stack AI development
+* Deployment of ML model as a live web application
 
 ---
